@@ -452,7 +452,8 @@ static int process_packet(struct dns_entry *conf_data,
 	answb += query_len;
 	move_to_unaligned32((uint32_t *)answb, htonl(conf_ttl));
 	answb += 4;
-	move_to_unaligned16((uint16_t *)answb, htons(outr_rlen));
+//	move_to_unaligned16((uint16_t *)answb, htons(outr_rlen));
+	(*(bb__aliased_uint16_t*)(answb) = (htons(outr_rlen)));
 	answb += 2;
 	memcpy(answb, answstr, outr_rlen);
 	answb += outr_rlen;
